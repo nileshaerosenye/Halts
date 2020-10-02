@@ -1,0 +1,36 @@
+plugins {
+    id 'groovy'
+    id 'java'
+    id 'application'
+    id 'distribution'
+}
+
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+group 'org.example'
+version '1.1'
+
+distributions {
+    main {
+        contents {
+            from 'sweetalertsound.wav'
+            from 'correct.wav'
+        }
+    }
+}
+
+mainClassName = "restApi/GetHalts"
+//mainClassName = "temp/TestGroovy"
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.3.11'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'com.opencsv', name: 'opencsv', version: '4.1'
+}
