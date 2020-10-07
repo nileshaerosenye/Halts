@@ -170,11 +170,11 @@ class GetHalts {
         final JDialog dialog
 
         if ( halt.ResumeTMS ) {
-            op = new JOptionPane("${halt.Symbol} Resumed Halted: ${halt.HaltTMS} Resumed: ${halt.ResumeTMS}", JOptionPane.INFORMATION_MESSAGE);
+            op = new JOptionPane("Resumed : ${halt.Symbol}", JOptionPane.INFORMATION_MESSAGE);
             dialog = op.createDialog("Stock Resume Alert");
         }
         else {
-            op = new JOptionPane("${halt.Symbol} Halted: ${halt.HaltTMS} Reason: ${halt.Reason}", JOptionPane.INFORMATION_MESSAGE);
+            op = new JOptionPane("Halted : ${halt.Symbol}", JOptionPane.INFORMATION_MESSAGE);
             dialog = op.createDialog("Stock Halt Alert");
         }
 
@@ -187,7 +187,7 @@ class GetHalts {
                 dialog.setVisible(false);
                 dialog.dispose();
             }
-        }, 5000);
+        }, 10000);
 
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         dialog.setAlwaysOnTop(true);
