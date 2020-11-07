@@ -15,7 +15,7 @@ class GetHalts {
 
     static ArrayList<StockHalted> HaltedStocks = new ArrayList<StockHalted>()
     static boolean isFirstLoop = true
-    static long sleepMilliSec = 5000
+    static long sleepMilliSec = 30000
 
     public static void main(String[] args) {
 
@@ -61,8 +61,8 @@ class GetHalts {
 
     private static ArrayList<StockHalted> getHaltsInCSV() {
 
-        //def url = "https://www.nyse.com/api/trade-halts/current/download".toURL()
-        File url = new File("/Users/nileshmune/workspace/data/halts.csv")
+        def url = "https://www.nyse.com/api/trade-halts/current/download".toURL()
+//        File url = new File("/Users/nileshmune/workspace/data/halts.csv")
 
         ArrayList<StockHalted> removeList = new ArrayList<StockHalted>()
 
