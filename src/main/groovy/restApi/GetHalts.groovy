@@ -20,24 +20,16 @@ class GetHalts {
     public static void main(String[] args) {
 
         // Run this in a loop every 30 seconds
-        Date now = new Date()
-        TimeZone tz = TimeZone.getTimeZone("GMT-4:00")
-        String format = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-
-        // Is this the trading hour window ?
-        String s_SOD = now.format(format).toString().split("T")[0] + "T08:30:00.000-0400"
-        String s_EOD = now.format(format).toString().split("T")[0] + "T16:30:00.000-0400"
-        Date SOD = new SimpleDateFormat( format ).parse( s_SOD )
-        Date EOD = new SimpleDateFormat( format ).parse( s_EOD )
+        Date now
 
         // run a loop for 10 instances
         while ( true )
         {
-
             // are we in trading window ?
             now = new Date()
+            int Hrs = Integer.parseInt( now.format("HH") )
 
-            if (now.after(SOD) && now.before(EOD)) {
+            if ( Hrs > 6 && Hrs < 20 ) {
 //                println("We are in trading window")
                 // get the csv containing halted stocks
                 getHaltsInCSV()

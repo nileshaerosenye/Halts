@@ -6,24 +6,18 @@ class DateConvert {
 
     static void main(String[] args) {
 
-        println("Date concatenation")
-        // TMS=09/28/2020 06:55:37
-
         Date now = new Date()
-        TimeZone tz = TimeZone.getTimeZone("GMT-4:00")
+        TimeZone tz = TimeZone.getTimeZone("EST")
         String format = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        SimpleDateFormat HHformat = new SimpleDateFormat("HH")
 
-        // Is this the trading hour window ?
-        String s_SOD = now.format(format).toString().split("T")[0] + "T09:30:00.000-0400"
-        String s_EOD = now.format(format).toString().split("T")[0] + "T23:59:00.000-0400"
-        Date SOD = new SimpleDateFormat( format ).parse( s_SOD )
-        Date EOD = new SimpleDateFormat( format ).parse( s_EOD )
-
-        String formatIN = "MM/dd/yyyy HH:mm:ss"
-        String TMS="09/28/2020 09:30:34"
-        Date HaltTMS = new SimpleDateFormat( formatIN ).parse( TMS )
-        println("Halt date : " + HaltTMS)
-
+        println("Now is : " + now)
+        if (now.after(HHformat.parse("08")) && now.before(HHformat.parse("24"))) {
+            println("We are in trading window")
+        }
+        else {
+            println("Outside the trading window")
+        }
 
     }
 
