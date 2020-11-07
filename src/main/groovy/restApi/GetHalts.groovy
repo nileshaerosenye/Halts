@@ -15,7 +15,7 @@ class GetHalts {
 
     static ArrayList<StockHalted> HaltedStocks = new ArrayList<StockHalted>()
     static boolean isFirstLoop = true
-    static long sleepMilliSec = 30000
+    static long sleepMilliSec = 5000
 
     public static void main(String[] args) {
 
@@ -59,11 +59,10 @@ class GetHalts {
 
     }
 
-
     private static ArrayList<StockHalted> getHaltsInCSV() {
 
-        def url = "https://www.nyse.com/api/trade-halts/current/download".toURL()
-//        File url = new File("/Users/nileshmune/workspace/data/halts.csv")
+        //def url = "https://www.nyse.com/api/trade-halts/current/download".toURL()
+        File url = new File("/Users/nileshmune/workspace/data/halts.csv")
 
         ArrayList<StockHalted> removeList = new ArrayList<StockHalted>()
 
@@ -139,7 +138,6 @@ class GetHalts {
 
     }
 
-
     private static void playAudio( String fName ) {
 //        println("Playing audio alert")
 
@@ -162,12 +160,14 @@ class GetHalts {
         final JDialog dialog
 
         if ( halt.ResumeTMS ) {
-            op = new JOptionPane("Resumed : ${halt.Symbol}", JOptionPane.INFORMATION_MESSAGE);
-            dialog = op.createDialog("Stock Resume Alert");
+            op = new JOptionPane("Resumed : ${halt.Symbol}", JOptionPane.INFORMATION_MESSAGE)
+            dialog = op.createDialog("Stock Resume Alert")
+            dialog.setLocation(500,10)
         }
         else {
-            op = new JOptionPane("Halted : ${halt.Symbol}", JOptionPane.INFORMATION_MESSAGE);
-            dialog = op.createDialog("Stock Halt Alert");
+            op = new JOptionPane("Halted : ${halt.Symbol}", JOptionPane.INFORMATION_MESSAGE)
+            dialog = op.createDialog("Stock Halt Alert")
+            dialog.setLocation(700,10)
         }
 
         // Create a new timer
