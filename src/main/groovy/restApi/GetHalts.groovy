@@ -17,6 +17,8 @@ class GetHalts {
     static boolean isFirstLoop = true
     static long sleepMilliSec = 30000
 
+    static int nowHaltCount=0, nowResumeCount=0
+
     public static void main(String[] args) {
 
         // Run this in a loop every 30 seconds
@@ -67,6 +69,8 @@ class GetHalts {
         ArrayList<StockHalted> removeList = new ArrayList<StockHalted>()
 
         int LineCount=0
+        this.nowHaltCount=0
+        this.nowResumeCount=0
         Reader reader = url.newReader()
         CSVReader csvReader = new CSVReader( reader )
 
@@ -114,6 +118,7 @@ class GetHalts {
                     if ( ! isFirstLoop ) {
                         println("Halt ALERT | " + halt)
                         showDialog( halt )
+                        this.nowHaltCount++
                     }
                 }
                 if ( isResumed ) {
@@ -123,6 +128,7 @@ class GetHalts {
                     playAudio( "correct.wav" )
                     // show dialog
                     showDialog( halt )
+                    this.nowResumeCount++
                 }
 
             }
@@ -162,12 +168,12 @@ class GetHalts {
         if ( halt.ResumeTMS ) {
             op = new JOptionPane("Resumed : ${halt.Symbol}", JOptionPane.INFORMATION_MESSAGE)
             dialog = op.createDialog("Stock Resume Alert")
-            dialog.setLocation(500,10)
+            dialog.setLocation(800, 200 * this.nowResumeCount )
         }
         else {
             op = new JOptionPane("Halted : ${halt.Symbol}", JOptionPane.INFORMATION_MESSAGE)
             dialog = op.createDialog("Stock Halt Alert")
-            dialog.setLocation(700,10)
+            dialog.setLocation(400, 200 * this.nowHaltCount )
         }
 
         // Create a new timer
